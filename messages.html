@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messaging Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000; /* Set background color */
+        color: #0000ff; /* Set font color to dark blue */
+    }
+
+    header {
+        background-color: #000;
+        color: #00ff00; /* Neon green color */
+        padding: 10px 20px;
+        text-align: center;
+        border-bottom: 2px solid #00ff00; /* Neon green border bottom */
+    }
+
+    .container {
+        display: flex;
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #000; /* Set background color */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .sidebar {
+        width: 300px;
+        background-color: #000; /* Set background color */
+        color: #00ff00; /* Neon green color */
+        padding: 20px;
+        border-right: 2px solid #00ff00; /* Neon green border right */
+    }
+
+    .sidebar h2 {
+        margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar li {
+        margin-bottom: 10px;
+    }
+
+    .chat-area {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .message {
+        margin-bottom: 15px;
+    }
+
+    .message .sender {
+        font-weight: bold;
+        color: #fff; /* White font color */
+    }
+
+    .message .time {
+        font-size: 12px;
+        color: #ccc; /* Light gray font color */
+    }
+
+    .input-area {
+        padding: 20px;
+        border-top: 2px solid #00ff00; /* Neon green border top */
+        background-color: #000; /* Set background color */
+    }
+
+    .input-area textarea {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border: 1px solid #00ff00; /* Neon green border */
+        border-radius: 5px;
+        resize: none;
+        background-color: #111; /* Darker background color */
+        color: #fff; /* White font color */
+    }
+
+    .input-area button {
+        padding: 10px 15px;
+        background-color: #000; /* Set button background color to black */
+        color: #fff; /* White font color */
+        border: 2px solid #00ff00; /* Neon green border */
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+    }
+
+    .input-area button:hover {
+        background-color: #111; /* Darker background color */
+        transform: translateY(-2px);
+    }
+
+    .input-area button:active {
+        background-color: #000; /* Set button background color to black */
+        transform: translateY(0);
+    }
+
+    .input-area button:focus {
+        outline: none;
+    }
+
+    /* Animation for button clicked */
+    .input-area button.clicked {
+        background-color: #111; /* Darker background color */
+        transform: translateY(2px);
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Messaging Section</h1>
+</header>
+<div class="container">
+    <div class="sidebar">
+        <h2>People</h2>
+        <ul>
+            <li>Arjun</li>
+            <li>Aisha</li>
+            <li>Rajesh</li>
+            <li>Meera</li>
+            <li>Krishna</li>
+            <li>Ananya</li>
+            <li>Vikram</li>
+            <li>Deepika</li>
+        </ul>
+    </div>
+    <div class="chat-area">
+        <div class="message">
+            <span class="sender">John Doe</span>
+            <span class="time">12:30 PM</span>
+            <p>Hello, how are you?</p>
+        </div>
+        <div class="message">
+            <span class="sender">Jane Doe</span>
+            <span class="time">12:35 PM</span>
+            <p>I'm doing well, thanks for asking!</p>
+        </div>
+        <!-- More messages go here -->
+    </div>
+</div>
+<div class="input-area">
+    <textarea placeholder="Type your message..."></textarea>
+    <button onclick="sendMessage()">Send</button>
+</div>
+<script>
+    function sendMessage() {
+        var message = document.querySelector('.input-area textarea').value;
+        if (message.trim() !== '') {
+            var chat = document.querySelector('.chat-area');
+            var newMessage = document.createElement('div');
+            newMessage.classList.add('message');
+            var sender = document.createElement('span');
+            sender.classList.add('sender');
+            sender.textContent = 'You';
+            var time = document.createElement('span');
+            time.classList.add('time');
+            var currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            time.textContent = currentTime;
+            var text = document.createElement('p');
+            text.textContent = message;
+            newMessage.appendChild(sender);
+            newMessage.appendChild(time);
+            newMessage.appendChild(text);
+            chat.appendChild(newMessage);
+            document.querySelector('.input-area textarea').value = '';
+            chat.scrollTop = chat.scrollHeight;
+        }
+    }
+</script>
+</body>
+</html>
